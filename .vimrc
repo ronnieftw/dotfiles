@@ -1,51 +1,44 @@
-syntax enable " enable syntax processing
+set nocompatible 
+
+syntax enable
 filetype on
 filetype plugin indent on
+
+set termguicolors        " use 24-bit RGB colors, bypasses 16-color ANSI mapping
+set background=dark
 colorscheme solarized
 
-set nocompatible " don't bother being vi compatible
-set hidden " hides buffers instead of closing them
-set background=dark
-set backspace=indent,eol,start
-set title
-set wildmenu
-set wildmode=full
-set nostartofline
-set nowrap
-set linebreak
-set autoindent
-set smartindent
-set tabstop=2 " number of visual spaces per TAB
-set softtabstop=2 " number of spaces in tab when editing
-set expandtab " tabs are spaces
-set shiftwidth=2 " number of spaces for use for autoindent
-set shiftround " always indent to a multiple of shiftwidth
-set complete-=i " autocomplete in vim (use Ctrl-p) 
-set showmatch " show matching braces
-set formatoptions=tcroql
-set hlsearch " highlights matching search results
-set incsearch " search as letters are entered
-set ignorecase " ignores case for searching
-set smartcase " unless capital letters are being used
-set laststatus=2 " always shows the status line
-" set relativenumber uses relative line numbers instead of absolute
-set ruler " displays ruler in lower right (line, column, percent)
-set gdefault " uses /g as default
-set textwidth=80
-set colorcolumn=81
-set cursorline " creates highlight for cursor
-set scrolloff=5 " cursor is never more than 5 lines away from edge of screen
-set nobackup
-set undofile
-set noswapfile
-set history=500
-set undolevels=500
-set lazyredraw " only redraw when you need to
-set pastetoggle=<F2> " use in insert mode to make pasting not shitty
-
-if has('gui_running')
-    set background=light
-else 
-    set background=dark
-endif
-
+set hidden               " hide buffers instead of closing them when switching
+set backspace=indent,eol,start " allow backspace over autoindent, line breaks, and insert start
+set title                " set terminal window title to current file
+set wildmenu             " show completion matches in a menu above the command line
+set wildmode=list:longest,full " first tab completes to longest match + lists, second tab cycles
+set nostartofline        " keep cursor column when jumping (G, gg, Ctrl-D, etc.)
+set nowrap               " don't wrap long lines
+set linebreak            " if wrap is on, break at word boundaries not mid-word
+set autoindent           " copy indent from current line when starting a new line
+set tabstop=2            " number of spaces a <Tab> character counts for
+set softtabstop=2        " number of spaces a <Tab> keypress inserts (in insert mode)
+set expandtab            " insert spaces instead of tab characters
+set shiftwidth=2         " spaces used for >> << and autoindent
+set shiftround           " always indent to a multiple of shiftwidth
+set complete-=i          " don't scan included files for Ctrl-p completion (slow)
+set showmatch            " briefly jump to matching bracket when you type one
+set formatoptions=tcroql " t=wrap text, c=wrap comments, r=continue comment on Enter, o=on o/O, q=allow gq, l=don't break existing long lines
+set hlsearch             " highlight all search matches
+set incsearch            " jump to matches as you type the search pattern
+set ignorecase           " case-insensitive search
+set smartcase            " override ignorecase if pattern contains uppercase
+set laststatus=2         " always show the status line (0=never, 1=only splits, 2=always)
+set ruler                " show line/column/percent in the status line
+set textwidth=80         " auto-wrap text at 80 characters
+set scrolloff=5          " keep at least 5 lines visible above/below the cursor
+set clipboard=unnamed    " yank/paste uses the system clipboard
+set nobackup             " don't create backup files
+set noswapfile           " don't create swap files
+set undofile             " persist undo history across sessions
+set undodir=~/.vim/undodir " where to store undo files (keeps them out of project dirs)
+set history=500          " remember 500 commands and searches
+set undolevels=500       " maximum number of undos
+set lazyredraw           " don't redraw during macros, faster execution
+set pastetoggle=<F2>     " toggle paste mode to prevent auto-indent mangling pasted text
