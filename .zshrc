@@ -11,13 +11,7 @@ setopt HIST_IGNORE_ALL_DUPS # Delete old duplicate entries when saving history
 setopt HIST_IGNORE_SPACE    # Preface commands with a space to keep it out of history (for secrets)
 setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks from each command line
 
-
-
 # Git branch in prompt.
-#parse_git_branch() {
-#    branch=$(git symbolic-ref --short HEAD 2>/dev/null) && echo " ($branch)"
-#}
-
 # Autoload zsh add-zsh-hook and vcs_info functions (-U autoload w/o substition, -z use zsh style)
 autoload -Uz add-zsh-hook vcs_info
 # Enable substitution in the prompt.
@@ -35,8 +29,6 @@ zstyle ':vcs_info:*' stagedstr ' +'
 # Set the format of the Git information for vcs_info
 zstyle ':vcs_info:git:*' formats '(%b%u%c)'
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
-
-
 
 # Aliases
 alias ls="ls -GFh"
