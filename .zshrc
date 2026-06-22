@@ -14,12 +14,28 @@ setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks from each command line
 
 
 # Git branch in prompt.
-parse_git_branch() {
-  branch=$(git symbolic-ref --short HEAD 2>/dev/null) && echo " ($branch)"
-}
+#parse_git_branch() {
+#    branch=$(git symbolic-ref --short HEAD 2>/dev/null) && echo " ($branch)"
+#}
 
-setopt PROMPT_SUBST
-export PROMPT='%n@%m:%1~%F{green}$(parse_git_branch)%f $ '
+# Autoload zsh add-zsh-hook and vcs_info functions (-U autoload w/o substition, -z use zsh style)
+autoload -Uz add-zsh-hook vcs_info
+# Enable substitution in the prompt.
+setopt prompt_subst
+# Run vcs_info just before a prompt is displayed (precmd)
+add-zsh-hook precmd vcs_info
+# add ${vcs_info_msg_0} to the prompt
+PROMPT='%n@%m:%1~%F{green} ${vcs_info_msg_0_}%f $ '
+
+# Enable checking for (un)staged changes, enabling use of %u and %c
+zstyle ':vcs_info:*' check-for-changes true
+# Set custom strings for an unstaged vcs repo changes (*) and staged changes (+)
+zstyle ':vcs_info:*' unstagedstr ' *'
+zstyle ':vcs_info:*' stagedstr ' +'
+# Set the format of the Git information for vcs_info
+zstyle ':vcs_info:git:*' formats '(%b%u%c)'
+zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
+
 
 
 # Aliases
