@@ -15,11 +15,15 @@ setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks from each command line
 # Autoload zsh add-zsh-hook and vcs_info functions (-U autoload w/o substition, -z use zsh style)
 autoload -Uz add-zsh-hook vcs_info
 # Enable substitution in the prompt.
-setopt prompt_subst
+setopt PROMPT_SUBST
 # Run vcs_info just before a prompt is displayed (precmd)
 add-zsh-hook precmd vcs_info
 # add ${vcs_info_msg_0} to the prompt
-PROMPT='%n@%m:%1~%F{green} ${vcs_info_msg_0_}%f $ '
+if [[ -n "$SSH_CONNECTION" ]]; then
+  PROMPT='%F{magenta}%n@%m%f:%1~%F{green} ${vcs_info_msg_0_}%f $ '
+else
+  PROMPT='%n@%m:%1~%F{green} ${vcs_info_msg_0_}%f $ '
+fi
 
 # Enable checking for (un)staged changes, enabling use of %u and %c
 zstyle ':vcs_info:*' check-for-changes true
