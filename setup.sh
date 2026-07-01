@@ -13,3 +13,15 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true    # full pat
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"  # list view default
 
 
+# ── Dotfiles ──────────────────────────────────────────────────────
+cp .gitignore_global ~/.gitignore_global
+cp .tmux.conf ~/.tmux.conf
+cp .vimrc ~/.vimrc
+cp .zshrc ~/.zshrc
+
+mkdir -p ~/.vim/colors
+cp solarized.vim ~/.vim/colors
+
+source ~/.zshrc
+
+
